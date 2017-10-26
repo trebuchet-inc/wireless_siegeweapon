@@ -43,8 +43,8 @@ public class NetworkTrackerComponent : Photon.MonoBehaviour
 	void Update () {
 		if (!photonView.isMine)
 		{
-			transform.position = Vector3.Lerp(transform.position, _correctPlayerPos, Time.deltaTime * 10);
-			transform.rotation = Quaternion.Lerp(transform.rotation, _correctPlayerRot, Time.deltaTime * 10);
+			transform.position = Vector3.Lerp(transform.position, this._correctPlayerPos, Time.deltaTime * 10);
+			transform.rotation = Quaternion.Lerp(transform.rotation, this._correctPlayerRot, Time.deltaTime * 10);
 		}
 		else
 		{
@@ -62,8 +62,8 @@ public class NetworkTrackerComponent : Photon.MonoBehaviour
         }
         else
         {
-            _correctPlayerPos = (Vector3) stream.ReceiveNext();
-            _correctPlayerRot =(Quaternion) stream.ReceiveNext();
+            this._correctPlayerPos = (Vector3) stream.ReceiveNext();
+            this._correctPlayerRot =(Quaternion) stream.ReceiveNext();
         }
     }
 }
