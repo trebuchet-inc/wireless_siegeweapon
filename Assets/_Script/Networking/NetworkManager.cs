@@ -29,27 +29,11 @@ public class NetworkManager : Photon.PunBehaviour
 
     public override void OnJoinedRoom()
     {
-        GameObject monster = PhotonNetwork.Instantiate("monsterprefab", Vector3.zero, Quaternion.identity, 0);
-        monster.GetComponent<myThirdPersonController>().isControllable = true;
-        myPhotonView = monster.GetComponent<PhotonView>();
+        
     }
 
     public void OnGUI()
     {
         GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
-
-        if (PhotonNetwork.inRoom)
-        {
-            bool shoutMarco = GameLogic.playerWhoIsIt == PhotonNetwork.player.ID;
-
-            if (shoutMarco && GUILayout.Button("Marco!"))
-            {
-                myPhotonView.RPC("Marco", PhotonTargets.All);
-            }
-            if (!shoutMarco && GUILayout.Button("Polo!"))
-            {
-                myPhotonView.RPC("Polo", PhotonTargets.All);
-            }
-        }
     }
 }
