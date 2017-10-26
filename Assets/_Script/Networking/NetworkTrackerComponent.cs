@@ -55,7 +55,6 @@ public class NetworkTrackerComponent : Photon.MonoBehaviour
 
 	public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-		print("lol");
         if (stream.isWriting)
         {
             stream.SendNext(_trackedObj.transform.position);
