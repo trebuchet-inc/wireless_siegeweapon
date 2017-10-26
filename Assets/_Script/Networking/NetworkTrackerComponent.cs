@@ -55,8 +55,8 @@ public class NetworkTrackerComponent : Photon.MonoBehaviour
         }
         else
         {
-            this.transform.position = (Vector3) stream.ReceiveNext();
-            this.transform.rotation = (Quaternion) stream.ReceiveNext();
+            this.transform.position = Vector3.Lerp(transform.position, (Vector3) stream.ReceiveNext(), Time.deltaTime) ;
+            this.transform.rotation = Quaternion.Lerp(transform.rotation, (Quaternion) stream.ReceiveNext(), Time.deltaTime);
         }
     }
 }
