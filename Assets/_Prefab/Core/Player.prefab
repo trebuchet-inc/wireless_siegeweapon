@@ -171,7 +171,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
 --- !u!81 &81170053614187902
 AudioListener:
   m_ObjectHideFlags: 1
@@ -208,8 +207,8 @@ MonoBehaviour:
   OnInitialized:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   EnableEditorPlayerPreview: 0
   EditorPlayerPreview: {fileID: 4300000, guid: 4c5ee852bb16638409bc37f8004f52a2, type: 3}
   EditorPlayspacePreview: {fileID: 4300000, guid: 53999722e4cf33d40b85a5c7a0c317fd,
