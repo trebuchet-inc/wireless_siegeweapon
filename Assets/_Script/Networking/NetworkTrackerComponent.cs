@@ -1,26 +1,62 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Photon;
+using NewtonVR;
 
 public enum ObjectToTrack 
 {
 	NVR_Head,
-	NVR_Hand,
+	NVR_Hand_Right,
+	NVR_Hand_Left,
 	Custom
 }
 
-public class NetworkTrackerComponent : MonoBehaviour 
+public class NetworkTrackerComponent : Photon.MonoBehaviour 
 {
-	public ObjectToTrack objectToTrack;
-	public GameObject customObject;
+	[HideInInspector] public ObjectToTrack objectToTrack;
+	[HideInInspector] public GameObject customObject;
 
-	// Use this for initialization
+	GameObject _trackedObj;
+
 	void Start () {
-		
+		switch(objectToTrack)
+		{
+			case ObjectToTrack.NVR_Head :
+			_trackedObj = FindObjectOfType<NVRPlayer>().Head.gameObject;
+			break;
+
+			case ObjectToTrack.NVR_Hand_Right :
+			_trackedObj = FindObjectOfType<NVRPlayer>().RightHand.gameObject;
+			break;
+
+			case ObjectToTrack.NVR_Hand_Left :
+			_trackedObj = FindObjectOfType<NVRPlayer>().LeftHand.gameObject;
+			break;
+
+			case ObjectToTrack.Custom :
+			_trackedObj = customObject;
+			break;
+		}
 	}
 	
-	// Update is called once per frame
 	void Update () {
-		
+		if (photonView.isMine)
+		{
+			transform.position = _trackedObj.transform.position;
+			transform.rotation = _trackedObj.transform.rotation;
+		}
 	}
+
+	public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+        }
+        else
+        {
+            this.transform.position = (Vector3) stream.ReceiveNext();
+            this.transform.rotation = (Quaternion) stream.ReceiveNext();
+        }
+    }
 }
