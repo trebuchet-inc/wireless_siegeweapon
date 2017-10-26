@@ -16,6 +16,8 @@ public class NetworkTrackerComponent : Photon.MonoBehaviour
 	[HideInInspector] public GameObject customObject;
 
 	GameObject _trackedObj;
+	Vector3 _correctPlayerPos;
+    Quaternion _correctPlayerRot;
 
 	void Start () {
 		switch(objectToTrack)
@@ -41,8 +43,8 @@ public class NetworkTrackerComponent : Photon.MonoBehaviour
 	void Update () {
 		if (photonView.isMine)
 		{
-			transform.position = _trackedObj.transform.position;
-			transform.rotation = _trackedObj.transform.rotation;
+			transform.position = Vector3.Lerp(transform.position, _correctPlayerPos, Time.deltaTime);
+			transform.rotation = Quaternion.Lerp(transform.rotation, _correctPlayerRot, Time.deltaTime);
 		}
 	}
 
@@ -55,8 +57,8 @@ public class NetworkTrackerComponent : Photon.MonoBehaviour
         }
         else
         {
-            this.transform.position = Vector3.Lerp(transform.position, (Vector3) stream.ReceiveNext(), Time.deltaTime) ;
-            this.transform.rotation = Quaternion.Lerp(transform.rotation, (Quaternion) stream.ReceiveNext(), Time.deltaTime);
+            _correctPlayerPos = (Vector3) stream.ReceiveNext();
+            _correctPlayerRot =(Quaternion) stream.ReceiveNext();
         }
     }
 }
