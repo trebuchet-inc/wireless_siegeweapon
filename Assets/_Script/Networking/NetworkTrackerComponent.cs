@@ -57,8 +57,8 @@ public class NetworkTrackerComponent : Photon.MonoBehaviour
     {
         if (stream.isWriting)
         {
-            stream.SendNext(transform.position);
-            stream.SendNext(transform.rotation);
+            stream.SendNext(_trackedObj.transform.position);
+            stream.SendNext(_trackedObj.transform.rotation);
         }
         else
         {
