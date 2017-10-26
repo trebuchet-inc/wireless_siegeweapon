@@ -43,8 +43,8 @@ public class NetworkTrackerComponent : Photon.MonoBehaviour
 	void Update () {
 		if (!photonView.isMine)
 		{
-			transform.position = Vector3.Lerp(transform.position, _correctPlayerPos, Time.deltaTime * 100);
-			transform.rotation = Quaternion.Lerp(transform.rotation, _correctPlayerRot, Time.deltaTime * 100);
+			transform.position = Vector3.Lerp(transform.position, _correctPlayerPos, Time.deltaTime * 10);
+			transform.rotation = Quaternion.Lerp(transform.rotation, _correctPlayerRot, Time.deltaTime * 10);
 		}
 		else
 		{
