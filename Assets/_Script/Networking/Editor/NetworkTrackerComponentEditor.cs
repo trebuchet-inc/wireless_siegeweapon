@@ -4,15 +4,17 @@ using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(NetworkTrackerComponent))]
- public class MyScriptEditor : Editor
+ public class NetworkTrackerComponentEditor : Editor
  {
-   	void OnInspectorGUI()
+   	public override void OnInspectorGUI()
    	{
      	NetworkTrackerComponent myScript = target as NetworkTrackerComponent;
  
-     	myScript.objectToTrack = EditorGUILayout.EnumPopup("Object To Track", ObjectToTrack, null);
+     	myScript.objectToTrack = (ObjectToTrack)EditorGUILayout.EnumPopup("Object To Track", myScript.objectToTrack);
      
-    	if(myScript.objectToTrack == ObjectToTrack.Custom){}
- 
+    	if(myScript.objectToTrack == ObjectToTrack.Custom)
+		{
+			myScript.customObject = (GameObject)EditorGUILayout.ObjectField(myScript.customObject, typeof(GameObject), true);
+		} 
    	}
 }

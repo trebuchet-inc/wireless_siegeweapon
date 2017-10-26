@@ -12,6 +12,7 @@ public enum ObjectToTrack
 public class NetworkTrackerComponent : MonoBehaviour 
 {
 	public ObjectToTrack objectToTrack;
+	public GameObject customObject;
 
 	// Use this for initialization
 	void Start () {
