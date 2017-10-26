@@ -2,10 +2,8 @@
 
 public class NetworkManager : Photon.PunBehaviour
 {
-    public GameObject player;
     private PhotonView myPhotonView;
 
-    // Use this for initialization
     public void Start()
     {
         PhotonNetwork.ConnectUsingSettings("0.1");
@@ -31,6 +29,8 @@ public class NetworkManager : Photon.PunBehaviour
     public override void OnJoinedRoom()
     {
         PhotonNetwork.Instantiate("Head", Vector3.zero, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("leftHand", Vector3.zero, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("rightHand", Vector3.zero, Quaternion.identity, 0);
     }
 
     public void OnGUI()
