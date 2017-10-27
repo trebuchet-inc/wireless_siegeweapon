@@ -2,10 +2,18 @@
 
 public class NetworkManager : Photon.PunBehaviour
 {
-    private PhotonView myPhotonView;
+    public static NetworkManager Instance;
 
-    public void Start()
+    [HideInInspector] public PhotonView globalPhotonView;
+
+    void Awake()
     {
+        Instance = this;
+    }
+
+    void Start()
+    {
+        globalPhotonView = GetComponent<PhotonView>();
         PhotonNetwork.ConnectUsingSettings("0.1");
     }
 
@@ -31,6 +39,7 @@ public class NetworkManager : Photon.PunBehaviour
         PhotonNetwork.Instantiate("Head", Vector3.zero, Quaternion.identity, 0);
         PhotonNetwork.Instantiate("leftHand", Vector3.zero, Quaternion.identity, 0);
         PhotonNetwork.Instantiate("rightHand", Vector3.zero, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("NetworkObject", Vector3.up, Quaternion.identity, 0);
     }
 
     public void OnGUI()
