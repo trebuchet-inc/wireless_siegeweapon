@@ -40,8 +40,6 @@ public class NetworkTrackerComponent : Photon.MonoBehaviour
 			break;
 		}
 
-		//_masterPhotonView = transform.parent.GetComponent<PhotonView>();
-		if(photonView.isMine) Destroy(this.gameObject);
 	}
 	
 	void Update () {
