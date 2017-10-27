@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4412170217674392}
-  - component: {fileID: 114963185295382208}
+  - component: {fileID: 114458181363681124}
   m_Layer: 0
   m_Name: RemotePlayer
   m_TagString: Untagged
@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 4711668257527406}
   - component: {fileID: 114283169446942912}
   - component: {fileID: 114417468391847398}
+  - component: {fileID: 114467260867623218}
   m_Layer: 0
   m_Name: leftHand
   m_TagString: Untagged
@@ -88,6 +89,7 @@ GameObject:
   - component: {fileID: 4375715117204206}
   - component: {fileID: 114919618461648024}
   - component: {fileID: 114182237055692922}
+  - component: {fileID: 114974464639766012}
   m_Layer: 0
   m_Name: rightHand
   m_TagString: Untagged
@@ -104,6 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4562060448774168}
   - component: {fileID: 114622420043897692}
+  - component: {fileID: 114446012382618012}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -162,7 +165,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1206333966110310}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.43249512, y: 0.70458984, z: -0.101867676}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4562060448774168}
@@ -451,6 +454,84 @@ MonoBehaviour:
   PhysicalController: {fileID: 0}
   Hand: 0
   radius: 0.5
+--- !u!114 &114446012382618012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1859658133626686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  OwnerShipWasTransfered: 0
+  prefixBackup: -1
+  synchronization: 3
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 114622420043897692}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  currentMasterID: -1
+  isRuntimeInstantiated: 0
+--- !u!114 &114458181363681124
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1206333966110310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  OwnerShipWasTransfered: 0
+  prefixBackup: -1
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  currentMasterID: -1
+  isRuntimeInstantiated: 0
+--- !u!114 &114467260867623218
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1238147649113512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  OwnerShipWasTransfered: 0
+  prefixBackup: -1
+  synchronization: 3
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 114283169446942912}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  currentMasterID: -1
+  isRuntimeInstantiated: 0
 --- !u!114 &114622420043897692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -477,12 +558,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToTrack: 1
   customObject: {fileID: 0}
---- !u!114 &114963185295382208
+--- !u!114 &114974464639766012
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1206333966110310}
+  m_GameObject: {fileID: 1481211167148108}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
@@ -497,9 +578,7 @@ MonoBehaviour:
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
   ObservedComponents:
-  - {fileID: 114622420043897692}
   - {fileID: 114919618461648024}
-  - {fileID: 114283169446942912}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
