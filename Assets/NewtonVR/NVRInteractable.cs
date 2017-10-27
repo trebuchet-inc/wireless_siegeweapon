@@ -1,13 +1,12 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Events;
 
 namespace NewtonVR
 {
     public abstract class NVRInteractable : MonoBehaviour
     {
-        public Rigidbody rigidbody;
+        public Rigidbody Rigidbody;
 
         public bool CanAttach = true;
 
@@ -34,7 +33,7 @@ namespace NewtonVR
         protected Collider[] Colliders = new Collider[0];
         protected Vector3 ClosestHeldPoint;
 
-        public UnityEvent OnHovering;
+        
 
         public virtual bool IsAttached
         {
@@ -46,10 +45,10 @@ namespace NewtonVR
 
         protected virtual void Awake()
         {   
-            if (rigidbody == null)
-                rigidbody = this.GetComponent<Rigidbody>();
+            if (Rigidbody == null)
+                Rigidbody = this.GetComponent<Rigidbody>();
 
-            if (rigidbody == null)
+            if (Rigidbody == null)
             {
                 Debug.LogError("There is no rigidbody attached to this interactable.");
             }
@@ -118,7 +117,7 @@ namespace NewtonVR
 
             if (DisableKinematicOnAttach == true)
             {
-                rigidbody.isKinematic = false;
+                Rigidbody.isKinematic = false;
             }
         }
 
@@ -127,20 +126,27 @@ namespace NewtonVR
             if (hand.UseButtonUp == true)
             {
                 UseButtonUp();
+                
+                if (hand.OnEndUseInteraction != null)
+                {
+                    hand.OnEndUseInteraction.Invoke(this);
+                }
             }
 
             if (hand.UseButtonDown == true)
             {
                 UseButtonDown();
+                
+                if (hand.OnBeginUseInteraction != null)
+                {
+                    hand.OnBeginUseInteraction.Invoke(this);
+                }
             }
         }
 
         public virtual void HoveringUpdate(NVRHand hand, float forTime)
         {
-            if (OnHovering != null)
-            {
-                OnHovering.Invoke();
-            }
+
         }
 
         public void ForceDetach(NVRHand hand = null)
@@ -152,10 +158,11 @@ namespace NewtonVR
             }
             else
             {
-                for (int handIndex = 0; handIndex < AttachedHands.Count; handIndex++)
+                for (int handIndex = (AttachedHands.Count-1); handIndex >= 0; handIndex--)
                 {
-                    AttachedHands[handIndex].EndInteraction(this);
-                    this.EndInteraction(AttachedHands[handIndex]);
+                    NVRHand detaching = AttachedHands[handIndex];
+                    detaching.EndInteraction(this);
+                    this.EndInteraction(detaching);
                 }
             }
         }
@@ -167,12 +174,12 @@ namespace NewtonVR
 
             if (EnableKinematicOnDetach == true)
             {
-                rigidbody.isKinematic = true;
+                Rigidbody.isKinematic = true;
             }
 
             if (EnableGravityOnDetach == true)
             {
-                rigidbody.useGravity = true;
+                Rigidbody.useGravity = true;
             }
         }
 
@@ -194,12 +201,12 @@ namespace NewtonVR
 
         public virtual void AddExternalVelocity(Vector3 velocity)
         {
-            rigidbody.AddForce(velocity, ForceMode.VelocityChange);
+            Rigidbody.AddForce(velocity, ForceMode.VelocityChange);
         }
 
         public virtual void AddExternalAngularVelocity(Vector3 angularVelocity)
         {
-            rigidbody.AddTorque(angularVelocity, ForceMode.VelocityChange);
+            Rigidbody.AddTorque(angularVelocity, ForceMode.VelocityChange);
         }
 
         protected virtual void OnDestroy()

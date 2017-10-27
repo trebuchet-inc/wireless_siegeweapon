@@ -13,7 +13,7 @@ namespace NewtonVR
         protected override void Awake()
         {
             base.Awake();
-            this.rigidbody.maxAngularVelocity = 100f;
+            this.Rigidbody.maxAngularVelocity = 100f;
         }
 
         protected virtual void FixedUpdate()
@@ -22,7 +22,7 @@ namespace NewtonVR
             {
                 Vector3 PositionDelta = (AttachedHand.transform.position - InitialAttachPoint.position) * DeltaMagic;
 
-                this.rigidbody.AddForceAtPosition(PositionDelta, InitialAttachPoint.position, ForceMode.VelocityChange);
+                this.Rigidbody.AddForceAtPosition(PositionDelta, InitialAttachPoint.position, ForceMode.VelocityChange);
             }
 
             CurrentAngle = Quaternion.Angle(Quaternion.identity, this.transform.rotation);

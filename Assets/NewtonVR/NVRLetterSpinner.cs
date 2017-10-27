@@ -33,34 +33,34 @@ namespace NewtonVR
                 float distanceToRung = wheelAngle - (rung * RungAngleInterval);
                 float distanceToRungAbs = Mathf.Abs(distanceToRung);
 
-                float velocity = Mathf.Abs(this.rigidbody.angularVelocity.z);
+                float velocity = Mathf.Abs(this.Rigidbody.angularVelocity.z);
 
                 if (velocity > 0.001f && velocity < 0.5f)
                 {
                     if (distanceToRungAbs > SnapDistance)
                     {
-                        this.rigidbody.angularVelocity = LastAngularVelocity;
+                        this.Rigidbody.angularVelocity = LastAngularVelocity;
                     }
                     else
                     {
-                        this.rigidbody.velocity = Vector3.zero;
-                        this.rigidbody.angularVelocity = Vector3.zero;
+                        this.Rigidbody.velocity = Vector3.zero;
+                        this.Rigidbody.angularVelocity = Vector3.zero;
 
                         Vector3 newRotation = this.transform.localEulerAngles;
                         newRotation.z = rung * RungAngleInterval;
                         this.transform.localEulerAngles = newRotation;
 
-                        this.rigidbody.isKinematic = true;
+                        this.Rigidbody.isKinematic = true;
                     }
                 }
             }
 
-            LastAngularVelocity = this.rigidbody.angularVelocity;
+            LastAngularVelocity = this.Rigidbody.angularVelocity;
         }
 
         public override void BeginInteraction(NVRHand hand)
         {
-            this.rigidbody.isKinematic = false;
+            this.Rigidbody.isKinematic = false;
 
             base.BeginInteraction(hand);
         }

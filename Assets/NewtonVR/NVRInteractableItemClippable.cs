@@ -19,22 +19,22 @@ namespace NewtonVR
 
             GetTargetValues(out targetHandPosition, out targetHandRotation, out targetItemPosition, out targetItemRotation);
 
-            this.rigidbody.MovePosition(targetHandPosition);
-            this.rigidbody.MoveRotation(targetHandRotation);
+            this.Rigidbody.MovePosition(targetHandPosition);
+            this.Rigidbody.MoveRotation(targetHandRotation);
         }
 
         public override void BeginInteraction(NVRHand hand)
         {
             base.BeginInteraction(hand);
 
-            this.rigidbody.isKinematic = true;
+            this.Rigidbody.isKinematic = true;
         }
 
         public override void EndInteraction(NVRHand hand)
         {
             base.EndInteraction(hand);
 
-            this.rigidbody.isKinematic = false;
+            this.Rigidbody.isKinematic = false;
         }
 
     }

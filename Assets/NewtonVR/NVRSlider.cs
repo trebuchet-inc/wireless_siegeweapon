@@ -47,7 +47,7 @@ namespace NewtonVR
                     Vector3 PositionDelta = (PickupTransform.position - this.transform.position);
 
                     Vector3 velocity = PositionDelta * AttachedPositionMagic * Time.deltaTime;
-                    this.rigidbody.velocity = ProjectVelocityOnPath(velocity, SliderPath);
+                    this.Rigidbody.velocity = ProjectVelocityOnPath(velocity, SliderPath);
                 }
             }
 

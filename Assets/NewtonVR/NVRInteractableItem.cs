@@ -8,16 +8,18 @@ namespace NewtonVR
 {
     public class NVRInteractableItem : NVRInteractable
     {
-        private const float MaxVelocityChange = 10f;
-        private const float MaxAngularVelocityChange = 20f;
-        private const float VelocityMagic = 6000f;
-        private const float AngularVelocityMagic = 50f;
+        protected const float MaxVelocityChange = 10f;
+        protected const float MaxAngularVelocityChange = 20f;
+        protected const float VelocityMagic = 6000f;
+        protected const float AngularVelocityMagic = 50f;
 
         [Tooltip("If you have a specific point you'd like the object held at, create a transform there and set it to this variable")]
         public Transform InteractionPoint;
 
         public UnityEvent OnUseButtonDown;
         public UnityEvent OnUseButtonUp;
+
+        public UnityEvent OnHovering;
 
         public UnityEvent OnBeginInteraction;
         public UnityEvent OnEndInteraction;
@@ -36,18 +38,16 @@ namespace NewtonVR
 
         protected Dictionary<Collider, PhysicMaterial> MaterialCache = new Dictionary<Collider, PhysicMaterial>();
 
-        protected Transform TwoHandedInteractionPoint;
-
         protected override void Awake()
         {
             base.Awake();
 
-            this.rigidbody.maxAngularVelocity = 100f;
+            this.Rigidbody.maxAngularVelocity = 100f;
         }
 
         protected override void Start()
         {
-            base.Start();     
+            base.Start();
 
             if (NVRPlayer.Instance.VelocityHistorySteps > 0)
             {
@@ -87,45 +87,11 @@ namespace NewtonVR
                 }
                 else
                 {
-                    targetItemPosition = PickupTransforms[hand].position;;
-                    targetItemRotation = PickupTransforms[hand].rotation;
-
-                    targetHandPosition = hand.transform.position;
-                    targetHandRotation = hand.transform.rotation;
-                }
-            }
-            else if (AttachedHands.Count == 2)
-            {
-                if (InteractionPoint != null)
-                {
-                    targetItemPosition = InteractionPoint.position;
-                    targetItemRotation = InteractionPoint.rotation;
-
-                    targetHandPosition = AttachedHands[0].transform.position;
-                    targetHandRotation = Quaternion.LookRotation(AttachedHands[1].transform.position - AttachedHands[0].transform.position, Vector3.up);
-                }
-                else
-                {
-                    NVRHand mainHand;
-                    NVRHand secondHand;
-
-                    if(Vector3.Distance(AttachedHands[0].transform.position, transform.position) >= Vector3.Distance(AttachedHands[1].transform.position, transform.position))
-                    {
-                        mainHand = AttachedHands[0];
-                        secondHand = AttachedHands[1];
-                    }
-                    else 
-                    {
-                        mainHand = AttachedHands[1];
-                        secondHand = AttachedHands[0];
-                    }
-
-                    targetItemPosition = PickupTransforms[mainHand].position;
+                    targetItemPosition = this.transform.position;
                     targetItemRotation = this.transform.rotation;
 
-                    targetHandPosition = mainHand.transform.position; 
-                    if(PickupTransforms[mainHand].localPosition.z <= 0) targetHandRotation = Quaternion.LookRotation(secondHand.transform.position - mainHand.transform.position, Vector3.up);
-                    else targetHandRotation = Quaternion.LookRotation(mainHand.transform.position - secondHand.transform.position, Vector3.up);
+                    targetHandPosition = PickupTransforms[hand].position;
+                    targetHandRotation = PickupTransforms[hand].rotation;
                 }
             }
             else
@@ -169,11 +135,13 @@ namespace NewtonVR
                     {
                         firstHandRotation = targetHandRotation;
                     }
+
+                    targetItemRotation = NVRHelpers.AverageQuaternion(ref cumulativeItemRotation, targetItemRotation, firstItemRotation.Value, handIndex);
+                    targetHandRotation = NVRHelpers.AverageQuaternion(ref cumulativeHandRotation, targetHandRotation, firstHandRotation.Value, handIndex);
                 }
+
                 targetItemPosition = cumulativeItemVector / AttachedHands.Count;
                 targetHandPosition = cumulativeHandVector / AttachedHands.Count;
-                targetItemRotation = NVRHelpers.AverageQuaternion(ref cumulativeItemRotation, targetItemRotation, firstItemRotation.Value, AttachedHands.Count);
-                targetHandRotation = NVRHelpers.AverageQuaternion(ref cumulativeHandRotation, targetHandRotation, firstHandRotation.Value, AttachedHands.Count);
             }
         }
 
@@ -198,32 +166,32 @@ namespace NewtonVR
             Vector3 axis;
 
             positionDelta = (targetHandPosition - targetItemPosition);
-
             rotationDelta = targetHandRotation * Quaternion.Inverse(targetItemRotation);
+
+
+            Vector3 velocityTarget = (positionDelta * velocityMagic) * Time.deltaTime;
+            if (float.IsNaN(velocityTarget.x) == false)
+            {
+                this.Rigidbody.velocity = Vector3.MoveTowards(this.Rigidbody.velocity, velocityTarget, MaxVelocityChange);
+            }
+
 
             rotationDelta.ToAngleAxis(out angle, out axis);
 
             if (angle > 180)
-            {
                 angle -= 360;
-            }
-                
+
             if (angle != 0)
             {
                 Vector3 angularTarget = angle * axis;
                 if (float.IsNaN(angularTarget.x) == false)
                 {
                     angularTarget = (angularTarget * angularVelocityMagic) * Time.deltaTime;
-                    this.rigidbody.angularVelocity = Vector3.MoveTowards(this.rigidbody.angularVelocity, angularTarget, MaxAngularVelocityChange);
+                    this.Rigidbody.angularVelocity = Vector3.MoveTowards(this.Rigidbody.angularVelocity, angularTarget, MaxAngularVelocityChange);
                 }
             }
 
-            Vector3 velocityTarget = (positionDelta * velocityMagic) * Time.deltaTime;
-            if (float.IsNaN(velocityTarget.x) == false)
-            {
-                this.rigidbody.velocity = Vector3.MoveTowards(this.rigidbody.velocity, velocityTarget, MaxVelocityChange);
-            }
-            
+
             if (VelocityHistory != null)
             {
                 CurrentVelocityHistoryStep++;
@@ -232,8 +200,8 @@ namespace NewtonVR
                     CurrentVelocityHistoryStep = 0;
                 }
 
-                VelocityHistory[CurrentVelocityHistoryStep] = this.rigidbody.velocity;
-                AngularVelocityHistory[CurrentVelocityHistoryStep] = this.rigidbody.angularVelocity;
+                VelocityHistory[CurrentVelocityHistoryStep] = this.Rigidbody.velocity;
+                AngularVelocityHistory[CurrentVelocityHistoryStep] = this.Rigidbody.angularVelocity;
             }
         }
 
@@ -241,13 +209,13 @@ namespace NewtonVR
         {
             if (ExternalVelocity != Vector3.zero)
             {
-                this.rigidbody.velocity = Vector3.Lerp(this.rigidbody.velocity, ExternalVelocity, 0.5f);
+                this.Rigidbody.velocity = Vector3.Lerp(this.Rigidbody.velocity, ExternalVelocity, 0.5f);
                 ExternalVelocity = Vector3.zero;
             }
 
             if (ExternalAngularVelocity != Vector3.zero)
             {
-                this.rigidbody.angularVelocity = Vector3.Lerp(this.rigidbody.angularVelocity, ExternalAngularVelocity, 0.5f);
+                this.Rigidbody.angularVelocity = Vector3.Lerp(this.Rigidbody.angularVelocity, ExternalAngularVelocity, 0.5f);
                 ExternalAngularVelocity = Vector3.zero;
             }
         }
@@ -280,17 +248,17 @@ namespace NewtonVR
         {
             base.BeginInteraction(hand);
 
-            StartingDrag = rigidbody.drag;
-            StartingAngularDrag = rigidbody.angularDrag;
-            rigidbody.drag = 0;
-            rigidbody.angularDrag = 0.05f;
+            StartingDrag = Rigidbody.drag;
+            StartingAngularDrag = Rigidbody.angularDrag;
+            Rigidbody.drag = 0;
+            Rigidbody.angularDrag = 0.05f;
 
             DisablePhysicalMaterials();
 
             Transform pickupTransform = new GameObject(string.Format("[{0}] NVRPickupTransform", this.gameObject.name)).transform;
-            pickupTransform.parent = this.transform;
-            pickupTransform.position = hand.transform.position;
-            pickupTransform.rotation = hand.transform.rotation;
+            pickupTransform.parent = hand.transform;
+            pickupTransform.position = this.transform.position;
+            pickupTransform.rotation = this.transform.rotation;
             PickupTransforms.Add(hand, pickupTransform);
 
             ResetVelocityHistory();
@@ -327,8 +295,8 @@ namespace NewtonVR
 
             if (PickupTransforms.Count == 0)
             {
-                rigidbody.drag = StartingDrag;
-                rigidbody.angularDrag = StartingAngularDrag;
+                Rigidbody.drag = StartingDrag;
+                Rigidbody.angularDrag = StartingAngularDrag;
 
                 EnablePhysicalMaterials();
 
@@ -345,6 +313,11 @@ namespace NewtonVR
         public override void HoveringUpdate(NVRHand hand, float forTime)
         {
             base.HoveringUpdate(hand, forTime);
+
+            if (OnHovering != null)
+            {
+                OnHovering.Invoke();
+            }
         }
 
         public override void ResetInteractable()
@@ -380,13 +353,13 @@ namespace NewtonVR
                 Vector3? meanVelocity = GetMeanVector(VelocityHistory);
                 if (meanVelocity != null)
                 {
-                    this.rigidbody.velocity = meanVelocity.Value;
+                    this.Rigidbody.velocity = meanVelocity.Value;
                 }
 
                 Vector3? meanAngularVelocity = GetMeanVector(AngularVelocityHistory);
                 if (meanAngularVelocity != null)
                 {
-                    this.rigidbody.angularVelocity = meanAngularVelocity.Value;
+                    this.Rigidbody.angularVelocity = meanAngularVelocity.Value;
                 }
             }
         }

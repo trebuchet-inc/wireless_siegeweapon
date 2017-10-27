@@ -24,11 +24,11 @@ namespace NewtonVR
         protected override void Awake()
         {
             base.Awake();
-            this.rigidbody.maxAngularVelocity = 100f;
+            this.Rigidbody.maxAngularVelocity = 100f;
 
             if (HingeJoint == null)
             {
-                HingeJoint = rigidbody.gameObject.GetComponent<HingeJoint>();
+                HingeJoint = Rigidbody.gameObject.GetComponent<HingeJoint>();
             }
 
             Mid = HingeJoint.transform.localRotation;

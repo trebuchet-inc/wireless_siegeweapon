@@ -36,7 +36,7 @@ public class NVRConstrainedItem : NVRInteractable {
 
 		if(!rotationLock && !IsAttached && motor.magnitude != 0)
 		{
-			rigidbody.AddRelativeTorque(motor * Time.deltaTime, ForceMode.VelocityChange);
+			GetComponent<Rigidbody>().AddRelativeTorque(motor * Time.deltaTime, ForceMode.VelocityChange);
 		}
 	}
 
@@ -49,7 +49,7 @@ public class NVRConstrainedItem : NVRInteractable {
 		if(_joint == null) _joint = GetComponent<Joint>();
 		_joint.connectedAnchor = pos;
 
-		rigidbody.centerOfMass = _originLocalPosition;
+		GetComponent<Rigidbody>().centerOfMass = _originLocalPosition;
 	}
 	
 	public override void InteractingUpdate(NVRHand hand)
@@ -89,7 +89,7 @@ public class NVRConstrainedItem : NVRInteractable {
 		{
 			Vector3 velocity = _origin.InverseTransformPoint(hand.transform.position) - _attachementPoint;
 			velocity = (velocity - transform.localPosition) * 10;
-			rigidbody.velocity = transform.TransformVector(velocity);
+			GetComponent<Rigidbody>().velocity = transform.TransformVector(velocity);
 		} 
 
 		if(!rotationLock)
@@ -110,7 +110,7 @@ public class NVRConstrainedItem : NVRInteractable {
 			 					_joint.axis.z != 0 ? torque.z : 0);
 			torque *= Mathf.Deg2Rad * 100;
 
-			rigidbody.angularVelocity = transform.TransformVector(torque);
+			GetComponent<Rigidbody>().angularVelocity = transform.TransformVector(torque);
 		}
 	}
 }

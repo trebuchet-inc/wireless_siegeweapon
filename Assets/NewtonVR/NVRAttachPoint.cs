@@ -35,7 +35,7 @@ namespace NewtonVR
 
         protected virtual void Start()
         {
-            Rigidbody = Item.rigidbody;
+            Rigidbody = Item.Rigidbody;
         }
 
         private NVRInteractableItem FindNVRItem(GameObject gameobject)
@@ -86,7 +86,7 @@ namespace NewtonVR
 
             if (float.IsNaN(velocityTarget.x) == false)
             {
-                velocityTarget = Vector3.MoveTowards(Item.rigidbody.velocity, velocityTarget, MaxVelocityChange);
+                velocityTarget = Vector3.MoveTowards(Item.Rigidbody.velocity, velocityTarget, MaxVelocityChange);
                 Item.AddExternalVelocity(velocityTarget);
             }
 
@@ -109,7 +109,7 @@ namespace NewtonVR
                     if (float.IsNaN(angularTarget.x) == false)
                     {
                         angularTarget = (angularTarget * angularVelocityMagic) * Time.deltaTime;
-                        angularTarget = Vector3.MoveTowards(Item.rigidbody.angularVelocity, angularTarget, MaxAngularVelocityChange);
+                        angularTarget = Vector3.MoveTowards(Item.Rigidbody.angularVelocity, angularTarget, MaxAngularVelocityChange);
                         Item.AddExternalAngularVelocity(angularTarget);
                     }
                 }
