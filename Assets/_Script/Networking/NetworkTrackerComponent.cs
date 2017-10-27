@@ -18,7 +18,7 @@ public class NetworkTrackerComponent : Photon.MonoBehaviour
 	GameObject _trackedObj;
 	Vector3 _correctPlayerPos;
     Quaternion _correctPlayerRot;
-	PhotonView _masterPhotonView;
+	PhotonView _photonView;
 
 	void Start () {
 		switch(objectToTrack)
@@ -40,10 +40,12 @@ public class NetworkTrackerComponent : Photon.MonoBehaviour
 			break;
 		}
 
+		if(photonView == null) _photonView = transform.parent.GetComponent<PhotonView>();
+		else _photonView = photonView;
 	}
 	
 	void Update () {
-		if (!photonView.isMine)
+		if (!_photonView.isMine)
 		{
 			transform.position = Vector3.Lerp(transform.position, this._correctPlayerPos, Time.deltaTime * 10);
 			transform.rotation = Quaternion.Lerp(transform.rotation, this._correctPlayerRot, Time.deltaTime * 10);
