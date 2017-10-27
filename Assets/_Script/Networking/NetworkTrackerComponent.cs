@@ -40,11 +40,11 @@ public class NetworkTrackerComponent : Photon.MonoBehaviour
 			break;
 		}
 
-		//_masterPhotonView = transform.parent.GetComponent<PhotonView>();
+		_masterPhotonView = transform.parent.GetComponent<PhotonView>();
 	}
 	
 	void Update () {
-		if (!photonView.isMine)
+		if (!_masterPhotonView.isMine)
 		{
 			transform.position = Vector3.Lerp(transform.position, this._correctPlayerPos, Time.deltaTime * 10);
 			transform.rotation = Quaternion.Lerp(transform.rotation, this._correctPlayerRot, Time.deltaTime * 10);
