@@ -390,6 +390,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114990343425754572, guid: 7cbf2fb37c9d2f947a1b3102ff873f8b,
+        type: 2}
+      propertyPath: OnEndInteraction.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114967221717827704, guid: 7cbf2fb37c9d2f947a1b3102ff873f8b,
+        type: 2}
+      propertyPath: OnEndInteraction.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4024871868913698, guid: 7cbf2fb37c9d2f947a1b3102ff873f8b, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -421,6 +431,46 @@ Prefab:
     - target: {fileID: 4024871868913698, guid: 7cbf2fb37c9d2f947a1b3102ff873f8b, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114990343425754572, guid: 7cbf2fb37c9d2f947a1b3102ff873f8b,
+        type: 2}
+      propertyPath: OnEndInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HideAim
+      objectReference: {fileID: 0}
+    - target: {fileID: 114990343425754572, guid: 7cbf2fb37c9d2f947a1b3102ff873f8b,
+        type: 2}
+      propertyPath: OnEndInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114990343425754572, guid: 7cbf2fb37c9d2f947a1b3102ff873f8b,
+        type: 2}
+      propertyPath: OnEndInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114990343425754572, guid: 7cbf2fb37c9d2f947a1b3102ff873f8b,
+        type: 2}
+      propertyPath: OnEndInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114967221717827704, guid: 7cbf2fb37c9d2f947a1b3102ff873f8b,
+        type: 2}
+      propertyPath: OnEndInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HideAim
+      objectReference: {fileID: 0}
+    - target: {fileID: 114967221717827704, guid: 7cbf2fb37c9d2f947a1b3102ff873f8b,
+        type: 2}
+      propertyPath: OnEndInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114967221717827704, guid: 7cbf2fb37c9d2f947a1b3102ff873f8b,
+        type: 2}
+      propertyPath: OnEndInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114967221717827704, guid: 7cbf2fb37c9d2f947a1b3102ff873f8b,
+        type: 2}
+      propertyPath: OnEndInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7cbf2fb37c9d2f947a1b3102ff873f8b, type: 2}

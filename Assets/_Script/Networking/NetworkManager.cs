@@ -36,10 +36,8 @@ public class NetworkManager : Photon.PunBehaviour
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.Instantiate("Head", Vector3.zero, Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("leftHand", Vector3.zero, Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("rightHand", Vector3.zero, Quaternion.identity, 0);
-        PhotonNetwork.Instantiate("NetworkObject", Vector3.up, Quaternion.identity, 0);
+        GameObject o = PhotonNetwork.Instantiate("RemotePlayer", Vector3.zero, Quaternion.identity, 0);
+        Destroy(o);
     }
 
     public void OnGUI()
