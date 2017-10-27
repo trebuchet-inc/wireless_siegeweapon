@@ -1,4 +1,5 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -107,6 +108,8 @@ namespace NewtonVR
             return false;
         }
         
+        public UnityEvent OnHovering;
+        
         protected virtual void Update()
         {
         }
@@ -146,7 +149,10 @@ namespace NewtonVR
 
         public virtual void HoveringUpdate(NVRHand hand, float forTime)
         {
-
+            if (OnHovering != null)
+            {
+                OnHovering.Invoke();
+            }
         }
 
         public void ForceDetach(NVRHand hand = null)
