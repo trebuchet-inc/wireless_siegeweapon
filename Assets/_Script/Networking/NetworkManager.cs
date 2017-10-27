@@ -39,9 +39,9 @@ public class NetworkManager : Photon.PunBehaviour
         GameObject o = PhotonNetwork.Instantiate("Head", Vector3.zero, Quaternion.identity, 0);
         GameObject o1 = PhotonNetwork.Instantiate("leftHand", Vector3.zero, Quaternion.identity, 0);
         GameObject o2 = PhotonNetwork.Instantiate("rightHand", Vector3.zero, Quaternion.identity, 0);
-        Destroy(o);
-        Destroy(o1);
-        Destroy(o2);
+        // Destroy(o);
+        // Destroy(o1);
+        // Destroy(o2);
     }
 
     public void OnGUI()

@@ -40,7 +40,7 @@ public class NetworkTrackerComponent : Photon.MonoBehaviour
 			break;
 		}
 
-		_masterPhotonView = transform.parent.GetComponent<PhotonView>();
+		//_masterPhotonView = transform.parent.GetComponent<PhotonView>();
 	}
 	
 	void Update () {
