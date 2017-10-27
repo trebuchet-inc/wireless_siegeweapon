@@ -94,7 +94,7 @@ namespace NewtonVR
                     }
                 }
 
-                if (DropDistance != -1 && hand.CurrentInteractionStyle != InterationStyle.ByScript && shortestDistance > DropDistance)
+                if (DropDistance != -1 && hand.CurrentInteractionStyle != InteractionStyle.ByScript && shortestDistance > DropDistance)
                 {
                     DroppedBecauseOfDistance(hand);
 

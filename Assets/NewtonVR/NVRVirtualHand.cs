@@ -27,7 +27,7 @@ namespace NewtonVR
 
 			Player = NVRPlayer.Instance;
 
-            CurrentInteractionStyle = InterationStyle.Hold;
+            CurrentInteractionStyle = InteractionStyle.Hold;
 
             CurrentlyHoveringOver = new Dictionary<NVRInteractable, Dictionary<Collider, float>>();
 

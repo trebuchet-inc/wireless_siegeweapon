@@ -26,7 +26,7 @@ namespace NewtonVR
         [HideInInspector]
         public bool OculusSDKEnabled = false;
 
-        public InterationStyle InteractionStyle;
+        public InteractionStyle InteractionStyle;
         public bool PhysicalHands = true;
         public bool MakeControllerInvisibleOnInteraction = false;
         public bool AutomaticallySetControllerTransparency = true;
