@@ -36,7 +36,9 @@ public class NetworkManager : Photon.PunBehaviour
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.Instantiate("RemotePlayer", Vector3.zero, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Head", Vector3.zero, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("leftHand", Vector3.zero, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("rightHand", Vector3.zero, Quaternion.identity, 0);
     }
 
     public void OnGUI()
