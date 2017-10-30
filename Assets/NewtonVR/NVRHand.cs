@@ -564,6 +564,9 @@ namespace NewtonVR
                     OnBeginInteraction.Invoke(interactable);
                 }
             }
+            
+            if(IsRight) NetworkPlayerManager.Instance.beginInterractionTrigger[0] = true;
+            else NetworkPlayerManager.Instance.beginInterractionTrigger[1] = true;
         }
 
         public virtual void EndInteraction(NVRInteractable item)
@@ -590,6 +593,9 @@ namespace NewtonVR
                     CurrentHandState = HandState.Idle;
                 }
             }
+
+            if(IsRight) NetworkPlayerManager.Instance.endInterractionTrigger[0] = true;
+            else NetworkPlayerManager.Instance.endInterractionTrigger[1] = true;
         }
 
         protected bool PickupClosest()

@@ -11,8 +11,10 @@ public class NetworkPlayerData
 {
 	public SerializableVector3[] positions;
 	public SerializableQuaternion[] rotations;
+	public bool[] beginInterraction;
+	public bool[] endInterraction;
 
-	public NetworkPlayerData (Vector3[] pos, Quaternion[] rot)
+	public NetworkPlayerData (Vector3[] pos, Quaternion[] rot, bool[] bi, bool[] ei)
 	{
 		positions = new SerializableVector3[pos.Length];
 		for(int i = 0; i < positions.Length; i++)
@@ -25,6 +27,9 @@ public class NetworkPlayerData
 		{
 			rotations[i] = new SerializableQuaternion(rot[i]);
 		}
+
+		beginInterraction = bi;
+		endInterraction = ei;
 	}
 }
 
@@ -36,10 +41,53 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 	public GameObject playerPrefab;
 	public List<NetworkPlayerComponent> players;
 
+	public bool[] beginInterractionTrigger
+	{
+		get
+		{
+			bool[] buffer = _beginInterractionTrigger;
+			for(int i = 0; i < _beginInterractionTrigger.Length; i++)
+			{
+				_beginInterractionTrigger[i] = false;
+			}
+			return buffer;
+		}
+		set
+		{
+			_beginInterractionTrigger = value;
+		}
+	}
+
+	public bool[] endInterractionTrigger
+	{
+		get
+		{
+			bool[] buffer = _beginInterractionTrigger;
+			for(int i = 0; i < _beginInterractionTrigger.Length; i++)
+			{
+				_beginInterractionTrigger[i] = false;
+			}
+			return buffer;
+		}
+		set
+		{
+			_beginInterractionTrigger = value;
+		}
+	}
+
+	bool[] _beginInterractionTrigger;
+	bool[] _endInterractionTrigger;
+
 	void Awake()
     {
         Instance = this;
     }
+
+	void Start()
+	{
+		_beginInterractionTrigger = new bool[2];
+		_beginInterractionTrigger = new bool[2];
+	}
 
 	void FixedUpdate()
 	{
@@ -47,7 +95,9 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 
 		NetworkPlayerData data = new NetworkPlayerData(
 			new Vector3[]{NVRPlayer.Instance.Head.transform.position, NVRPlayer.Instance.LeftHand.transform.position, NVRPlayer.Instance.RightHand.transform.position},
-			new Quaternion[]{NVRPlayer.Instance.Head.transform.rotation, NVRPlayer.Instance.LeftHand.transform.rotation, NVRPlayer.Instance.RightHand.transform.rotation});
+			new Quaternion[]{NVRPlayer.Instance.Head.transform.rotation, NVRPlayer.Instance.LeftHand.transform.rotation, NVRPlayer.Instance.RightHand.transform.rotation},
+			beginInterractionTrigger,
+			endInterractionTrigger);
 
 		BinaryFormatter formatter = new BinaryFormatter();
 		
@@ -56,14 +106,19 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 		photonView.RPC("UpdateNetworkPlayer", PhotonTargets.Others, serializedData, personalID);
 	}
 
+	void OnDestroy()
+	{
+		photonView.RPC("DestroyNetworkPlayer", PhotonTargets.Others, personalID);
+	}
+
 	[PunRPC]
     void UpdateNetworkPlayer(byte[] data, int id)
     {
-        foreach(NetworkPlayerComponent pv in players)
+        foreach(NetworkPlayerComponent p in players)
 		{
-			if(pv.id == id)
+			if(p.id == id)
 			{
-				pv.targetValues = (NetworkPlayerData) SerializationToolkit.ByteArrayToObject(data);
+				p.targetValues = (NetworkPlayerData) SerializationToolkit.ByteArrayToObject(data);
 				return;
 			}
 		}
@@ -77,5 +132,19 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 
 		_networkPlayer.id = id;
 		players.Add(_networkPlayer);
+    }
+
+	[PunRPC]
+    void DestroyNetworkPlayer(int id)
+    {
+        foreach(NetworkPlayerComponent p in players)
+		{
+			if(p.id == id)
+			{
+				players.Remove(p);
+				Destroy(p.gameObject);
+				return;
+			}
+		}
     }
 }
