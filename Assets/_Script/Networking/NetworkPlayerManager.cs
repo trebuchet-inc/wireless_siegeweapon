@@ -143,7 +143,7 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 		{
 			if(p.id == id)
 			{
-				//players.Remove(p);
+				players.Remove(p);
 				Destroy(p.gameObject);
 				return;
 			}
