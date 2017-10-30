@@ -6,7 +6,7 @@ using NewtonVR;
 public class NetworkPlayerComponent : MonoBehaviour 
 {
 	public int id;
-	public NetworkPlayerData lastDataPackage;
+	public List<NetworkPlayerData> dataBuffer;
 
 	GameObject[] _playerParts;
 	NVRVirtualHand[] _hands;
@@ -15,20 +15,24 @@ public class NetworkPlayerComponent : MonoBehaviour
 	{
 		_playerParts = new GameObject[3];
 		_hands = new NVRVirtualHand[2];
-		lastDataPackage = new NetworkPlayerData(new Vector3[]{Vector3.zero,Vector3.zero,Vector3.zero}, 
-											new Quaternion[]{Quaternion.identity,Quaternion.identity,Quaternion.identity},
-											new bool[]{false,false},
-											new bool[]{false,false},
-											"");
+		dataBuffer = new List<NetworkPlayerData>();
 		setPlayerPart();
 	}
 
 	void FixedUpdate()
 	{
+		readData();
+	}
+
+	void readData()
+	{
+		if(dataBuffer.Count <= 0) return;
+
 		for(int i = 0; i < _playerParts.Length; i++)
 		{
 			if(_playerParts[i] != null)
 			{
+				NetworkPlayerData lastDataPackage = dataBuffer[dataBuffer.Count - 1];
 				_playerParts[i].transform.position = Vector3.Lerp(_playerParts[i].transform.position, lastDataPackage.positions[i].Deserialize(), Time.deltaTime * 10);
 				_playerParts[i].transform.rotation = Quaternion.Lerp(_playerParts[i].transform.rotation, lastDataPackage.rotations[i].Deserialize(), Time.deltaTime * 10);
 			}
@@ -38,19 +42,24 @@ public class NetworkPlayerComponent : MonoBehaviour
 			} 
 		}
 
-		for(int i = 0; i < _hands.Length; i++)
+		foreach(NetworkPlayerData data in dataBuffer)
 		{
-			if(lastDataPackage.beginInterraction[i])
+			for(int i = 0; i < _hands.Length; i++)
 			{
-				print("begin interraction from network player");
-				_hands[i].ForceInteraction(lastDataPackage.objectName);
-			} 
-			else if(lastDataPackage.endInterraction[i])
-			{
-				print("end interraction from network player");
-				_hands[i].Release();
+				if(data.beginInterraction[i])
+				{
+					print("begin interraction from network player");
+					_hands[i].ForceInteraction(data.objectName);
+				} 
+				else if(data.endInterraction[i])
+				{
+					print("end interraction from network player");
+					_hands[i].Release();
+				}
 			}
 		}
+
+		dataBuffer.Clear();
 	}
 
 	void setPlayerPart()

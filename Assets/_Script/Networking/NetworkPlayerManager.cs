@@ -120,7 +120,7 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 		{
 			if(p.id == id)
 			{
-				p.lastDataPackage = (NetworkPlayerData) SerializationToolkit.ByteArrayToObject(data);
+				p.dataBuffer.Add((NetworkPlayerData) SerializationToolkit.ByteArrayToObject(data));
 				return;
 			}
 		}
