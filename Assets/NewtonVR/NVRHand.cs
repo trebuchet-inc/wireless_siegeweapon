@@ -546,6 +546,7 @@ namespace NewtonVR
 
         public virtual void BeginInteraction(NVRInteractable interactable)
         {
+            print("BeginInteraction");
             if (interactable.CanAttach == true)
             {
                 if (interactable.AttachedHand != null)
@@ -564,7 +565,10 @@ namespace NewtonVR
                     OnBeginInteraction.Invoke(interactable);
                 }
             }
-            
+        }
+
+        public void SendBegininteraction()
+        {
             if(IsRight) NetworkPlayerManager.Instance.beginInterractionTrigger[0] = true;
             else NetworkPlayerManager.Instance.beginInterractionTrigger[1] = true;
         }
@@ -593,13 +597,17 @@ namespace NewtonVR
                     CurrentHandState = HandState.Idle;
                 }
             }
+        }
 
+        public void SendEndInteraction()
+        {
             if(IsRight) NetworkPlayerManager.Instance.endInterractionTrigger[0] = true;
             else NetworkPlayerManager.Instance.endInterractionTrigger[1] = true;
         }
 
         protected bool PickupClosest()
         {
+            print("PickupClosest");
             NVRInteractable closest = null;
             float closestDistance = float.MaxValue;
 

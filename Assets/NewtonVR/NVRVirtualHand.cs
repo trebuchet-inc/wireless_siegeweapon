@@ -77,6 +77,7 @@ namespace NewtonVR
 
         public void Hold()
         {
+            print("Hold");
             PickupClosest();
 
             if (IsInteracting)

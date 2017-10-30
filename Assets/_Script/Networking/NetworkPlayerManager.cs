@@ -90,7 +90,6 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 			endInterractionTrigger);
 	
 		BinaryFormatter formatter = new BinaryFormatter();
-		
 		byte[] serializedData = SerializationToolkit.ObjectToByteArray(data); 
 
 		photonView.RPC("UpdateNetworkPlayer", PhotonTargets.Others, serializedData, personalID);
