@@ -91,7 +91,7 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 		
 		for(int i = 0; i < beginInterractionTrigger.Length; i++)
 		{
-			if(beginInterractionTrigger[i]) print("begin Interraction");
+			if(beginInterractionTrigger[i]) print("begin interraction");
 			beginInterractionTrigger[i] = false;
 			endInterractionTrigger[i] = false;
 		}
@@ -138,7 +138,7 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 		{
 			if(p.id == id)
 			{
-				players.Remove(p);
+				//players.Remove(p);
 				Destroy(p.gameObject);
 				return;
 			}

@@ -41,6 +41,7 @@ public class NetworkPlayerComponent : MonoBehaviour
 		{
 			if(targetValues.beginInterraction[i])
 			{
+				print("begin interraction from network player");
 				_hands[i].Hold();
 			} 
 			else if(!targetValues.endInterraction[i])
