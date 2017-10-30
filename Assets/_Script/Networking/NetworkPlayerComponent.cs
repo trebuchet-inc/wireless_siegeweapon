@@ -21,7 +21,7 @@ public class NetworkPlayerComponent : MonoBehaviour
 	{
 		for(int i = 0; i < _playerpart.Length; i++)
 		{
-			if(_playerpart != null)
+			if(_playerpart[i] != null)
 			{
 				_playerpart[i].transform.position = Vector3.Lerp(_playerpart[i].transform.position, targetValues.positions[i].Deserialize(), Time.deltaTime * 10);
 				_playerpart[i].transform.rotation = Quaternion.Lerp(_playerpart[i].transform.rotation, targetValues.rotations[i].Deserialize(), Time.deltaTime * 10);
