@@ -120,6 +120,19 @@ namespace NewtonVR
             }
         }
 
+        public void ForceInteraction(string objectName)
+        {
+            print("Force interaction with " + objectName);
+            GameObject o = GameObject.Find(objectName);
+
+            BeginInteraction(o.GetComponent<NVRInteractableItem>());
+
+            if (IsInteracting)
+            {
+                CurrentHandState = HandState.GripToggleOnInteracting;
+            }
+        }
+
         public override void Initialize()
         {
             Rigidbody = this.GetComponent<Rigidbody>();

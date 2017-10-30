@@ -567,10 +567,12 @@ namespace NewtonVR
             }
         }
 
-        public void SendBegininteraction()
+        public void SendBegininteraction(NVRInteractable interactable)
         {
             if(IsRight) NetworkPlayerManager.Instance.beginInterractionTrigger[0] = true;
             else NetworkPlayerManager.Instance.beginInterractionTrigger[1] = true;
+
+            NetworkPlayerManager.Instance.objectName = interactable.transform.name;
         }
 
         public virtual void EndInteraction(NVRInteractable item)
@@ -645,7 +647,6 @@ namespace NewtonVR
         {
             NVRInteractable closest = null;
             float closestDistance = float.MaxValue;
-			
 
             foreach (var hovering in CurrentlyHoveringOver)
             {

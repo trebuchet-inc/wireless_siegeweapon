@@ -18,7 +18,8 @@ public class NetworkPlayerComponent : MonoBehaviour
 		lastDataPackage = new NetworkPlayerData(new Vector3[]{Vector3.zero,Vector3.zero,Vector3.zero}, 
 											new Quaternion[]{Quaternion.identity,Quaternion.identity,Quaternion.identity},
 											new bool[]{false,false},
-											new bool[]{false,false});
+											new bool[]{false,false},
+											"");
 		setPlayerPart();
 	}
 
@@ -42,7 +43,7 @@ public class NetworkPlayerComponent : MonoBehaviour
 			if(lastDataPackage.beginInterraction[i])
 			{
 				print("begin interraction from network player");
-				_hands[i].Hold();
+				_hands[i].ForceInteraction(lastDataPackage.objectName);
 			} 
 			else if(lastDataPackage.endInterraction[i])
 			{

@@ -13,8 +13,9 @@ public class NetworkPlayerData
 	public SerializableQuaternion[] rotations;
 	public bool[] beginInterraction;
 	public bool[] endInterraction;
+	public string objectName;
 
-	public NetworkPlayerData (Vector3[] pos, Quaternion[] rot, bool[] bi, bool[] ei)
+	public NetworkPlayerData (Vector3[] pos, Quaternion[] rot, bool[] begInt, bool[] endInt, string objName)
 	{
 		positions = new SerializableVector3[pos.Length];
 		for(int i = 0; i < positions.Length; i++)
@@ -28,8 +29,9 @@ public class NetworkPlayerData
 			rotations[i] = new SerializableQuaternion(rot[i]);
 		}
 
-		beginInterraction = bi;
-		endInterraction = ei;
+		beginInterraction = begInt;
+		endInterraction = endInt;
+		objectName = objName;
 	}
 }
 
@@ -41,6 +43,9 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 	public GameObject playerPrefab;
 	public List<NetworkPlayerComponent> players;
 
+	[HideInInspector]
+	public string objectName;
+	[HideInInspector]
 	public bool[] beginInterractionTrigger
 	{
 		get
@@ -52,7 +57,7 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 			_beginInterractionTrigger = value;
 		}
 	}
-
+	[HideInInspector]
 	public bool[] endInterractionTrigger
 	{
 		get
@@ -87,7 +92,8 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 			new Vector3[]{NVRPlayer.Instance.Head.transform.position, NVRPlayer.Instance.LeftHand.transform.position, NVRPlayer.Instance.RightHand.transform.position},
 			new Quaternion[]{NVRPlayer.Instance.Head.transform.rotation, NVRPlayer.Instance.LeftHand.transform.rotation, NVRPlayer.Instance.RightHand.transform.rotation},
 			beginInterractionTrigger,
-			endInterractionTrigger);
+			endInterractionTrigger,
+			objectName);
 	
 		BinaryFormatter formatter = new BinaryFormatter();
 		byte[] serializedData = SerializationToolkit.ObjectToByteArray(data); 
