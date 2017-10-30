@@ -23,7 +23,6 @@ public class NetworkManager : Photon.PunBehaviour
 
     public override void OnConnectedToMaster()
     {
-        // when AutoJoinLobby is off, this method gets called when PUN finished the connection (instead of OnJoinedLobby())
         PhotonNetwork.JoinRandomRoom();
     }
 
@@ -35,7 +34,8 @@ public class NetworkManager : Photon.PunBehaviour
     public override void OnJoinedRoom()
     {
         int id = PhotonNetwork.AllocateViewID();
-        NetworkPlayerManager.Instance.photonView.RPC("SpawnPlayer", PhotonTargets.OthersBuffered, Vector3.zero, Quaternion.identity, id);
+        NetworkPlayerManager.Instance.personalID = id;
+        NetworkPlayerManager.Instance.photonView.RPC("SpawnNetworkPlayer", PhotonTargets.OthersBuffered, Vector3.zero, Quaternion.identity, id);
     }
 
     public void OnGUI()

@@ -44,4 +44,6 @@ MonoBehaviour:
   - TaggedPlayer
   - SpawnOnNetwork
   - SpawnPlayer
+  - SpawnNetworkPlayer
+  - UpdateNetworkPlayer
   DisableAutoOpenWizard: 1

@@ -53,7 +53,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4781799738853610}
-  - component: {fileID: 114954187059059700}
+  - component: {fileID: 114653851793202388}
   m_Layer: 0
   m_Name: NetworkPlayer
   m_TagString: Untagged
@@ -86,7 +86,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4642640525745898}
-  - component: {fileID: 114422668113930930}
   - component: {fileID: 114191853907179452}
   m_Layer: 0
   m_Name: leftHand
@@ -103,7 +102,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4124034967004570}
-  - component: {fileID: 114613515058572586}
   - component: {fileID: 114386405849299032}
   m_Layer: 0
   m_Name: rightHand
@@ -120,7 +118,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4156382445552192}
-  - component: {fileID: 114867104403448336}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -436,48 +433,9 @@ MonoBehaviour:
     m_TypeName: NewtonVR.NVRHand+NVRInteractableEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   PhysicalController: {fileID: 0}
-  Hand: 0
+  Hand: 1
   radius: 0.5
---- !u!114 &114422668113930930
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1646288266760820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 308ee57e6a98b34478785bd815de6c74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToTrack: 2
-  customObject: {fileID: 0}
---- !u!114 &114613515058572586
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1773897206123716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 308ee57e6a98b34478785bd815de6c74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToTrack: 1
-  customObject: {fileID: 0}
---- !u!114 &114867104403448336
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1902316795256076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 308ee57e6a98b34478785bd815de6c74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToTrack: 0
-  customObject: {fileID: 0}
---- !u!114 &114954187059059700
+--- !u!114 &114653851793202388
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -485,21 +443,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1546890700858044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Script: {fileID: 11500000, guid: 798281c172da9be4aa00c768242451bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  OwnerShipWasTransfered: 0
-  prefixBackup: -1
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  currentMasterID: -1
-  isRuntimeInstantiated: 0
+  id: 0
+  targetValues:
+    positions: []
+    rotations: []
