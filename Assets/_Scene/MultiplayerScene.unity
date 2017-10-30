@@ -634,6 +634,11 @@ Prefab:
       propertyPath: OnBeginInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 20257248470610674, guid: 7cbf2fb37c9d2f947a1b3102ff873f8b,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114745608085829264, guid: 7cbf2fb37c9d2f947a1b3102ff873f8b, type: 2}
     - {fileID: 114865818080474888, guid: 7cbf2fb37c9d2f947a1b3102ff873f8b, type: 2}

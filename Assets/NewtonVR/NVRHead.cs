@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace NewtonVR
 {
-    public class NVRHead :  Photon.MonoBehaviour
+    public class NVRHead :  MonoBehaviour
     {
         public void Initialize() {}
     }

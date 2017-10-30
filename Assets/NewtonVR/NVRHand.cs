@@ -546,7 +546,7 @@ namespace NewtonVR
 
         public virtual void BeginInteraction(NVRInteractable interactable)
         {
-            print("BeginInteraction");
+            print(transform.parent.name + " BeginInteraction");
             if (interactable.CanAttach == true)
             {
                 if (interactable.AttachedHand != null)
@@ -607,7 +607,7 @@ namespace NewtonVR
 
         protected bool PickupClosest()
         {
-            print("PickupClosest");
+            print(transform.parent.name + " PickupClosest");
             NVRInteractable closest = null;
             float closestDistance = float.MaxValue;
 
