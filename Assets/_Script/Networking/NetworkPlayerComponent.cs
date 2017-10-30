@@ -47,6 +47,7 @@ public class NetworkPlayerComponent : MonoBehaviour
 			} 
 			else if(lastDataPackage.endInterraction[i])
 			{
+				print("end interraction from network player");
 				_hands[i].Release();
 			}
 		}
