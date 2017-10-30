@@ -237,6 +237,9 @@ namespace NewtonVR
 
             InputDevice.Initialize(this);
             InitializeRenderModel();
+
+            OnBeginInteraction.AddListener(SendBegininteraction);
+            OnEndInteraction.AddListener(SendEndInteraction);
         }
 
         protected virtual void Update()
@@ -601,7 +604,7 @@ namespace NewtonVR
             }
         }
 
-        public void SendEndInteraction()
+        public void SendEndInteraction(NVRInteractable interactable)
         {
             if(IsRight) NetworkPlayerManager.Instance.endInterractionTrigger[0] = true;
             else NetworkPlayerManager.Instance.endInterractionTrigger[1] = true;
