@@ -14,6 +14,7 @@ public class NetworkPlayerComponent : MonoBehaviour
 	void Start()
 	{
 		_playerParts = new GameObject[3];
+		_hands = new NVRVirtualHand[2];
 		targetValues = new NetworkPlayerData(new Vector3[]{Vector3.zero,Vector3.zero,Vector3.zero}, 
 											new Quaternion[]{Quaternion.identity,Quaternion.identity,Quaternion.identity},
 											new bool[]{false,false},
