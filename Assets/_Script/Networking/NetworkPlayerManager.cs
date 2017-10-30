@@ -76,7 +76,7 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 	void Start()
 	{
 		_beginInterractionTrigger = new bool[2];
-		_beginInterractionTrigger = new bool[2];
+		_endInterractionTrigger = new bool[2];
 	}
 
 	void FixedUpdate()
