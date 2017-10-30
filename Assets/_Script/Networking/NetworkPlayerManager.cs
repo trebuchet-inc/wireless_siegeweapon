@@ -91,6 +91,7 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 		
 		for(int i = 0; i < beginInterractionTrigger.Length; i++)
 		{
+			if(beginInterractionTrigger[i]) print("begin Interraction");
 			beginInterractionTrigger[i] = false;
 			endInterractionTrigger[i] = false;
 		}
