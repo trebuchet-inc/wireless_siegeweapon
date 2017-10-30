@@ -20,8 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4024871868913698}
   - component: {fileID: 114406418270998420}
-  - component: {fileID: 114745608085829264}
-  - component: {fileID: 114865818080474888}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -201,7 +199,7 @@ MonoBehaviour:
   InteractionStyle: 0
   PhysicalHands: 1
   MakeControllerInvisibleOnInteraction: 0
-  AutomaticallySetControllerTransparency: 1
+  AutomaticallySetControllerTransparency: 0
   VibrateOnHover: 1
   VelocityHistorySteps: 3
   OnInitialized:
@@ -248,30 +246,6 @@ MonoBehaviour:
   DEBUGSleepPerFrame: 13
   AutoSetFixedDeltaTime: 1
   NotifyOnVersionUpdate: 1
---- !u!114 &114745608085829264
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1367763556675730}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34741d591a424bf4caa9f51a133edc53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GeometryBlocksLaser: 1
-  LayersThatBlockLaser:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  CursorSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  CursorMaterial: {fileID: 0}
-  NormalCursorScale: 0.05
-  LaserEnabled: 1
-  LaserColor: {r: 0, g: 0, b: 1, a: 1}
-  LaserStartWidth: 0.02
-  LaserEndWidth: 0.001
-  OnCanvas: 0
-  CanvasUsed: 0
 --- !u!114 &114828170543510918
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -283,20 +257,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd93dbead6c28e42b0408c298a10966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114865818080474888
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1367763556675730}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 5
 --- !u!114 &114967221717827704
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -326,18 +286,17 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   OnEndInteraction:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: HideAim
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+    m_TypeName: NewtonVR.NVRHand+NVRInteractableEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnBeginUseInteraction:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: NewtonVR.NVRHand+NVRInteractableEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnEndUseInteraction:
+    m_PersistentCalls:
+      m_Calls: []
     m_TypeName: NewtonVR.NVRHand+NVRInteractableEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   PhysicalController: {fileID: 0}
@@ -370,18 +329,17 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   OnEndInteraction:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: HideAim
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+    m_TypeName: NewtonVR.NVRHand+NVRInteractableEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnBeginUseInteraction:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: NewtonVR.NVRHand+NVRInteractableEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnEndUseInteraction:
+    m_PersistentCalls:
+      m_Calls: []
     m_TypeName: NewtonVR.NVRHand+NVRInteractableEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   PhysicalController: {fileID: 0}
