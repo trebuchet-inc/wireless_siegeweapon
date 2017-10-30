@@ -88,19 +88,19 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 			new Quaternion[]{NVRPlayer.Instance.Head.transform.rotation, NVRPlayer.Instance.LeftHand.transform.rotation, NVRPlayer.Instance.RightHand.transform.rotation},
 			beginInterractionTrigger,
 			endInterractionTrigger);
+	
+		BinaryFormatter formatter = new BinaryFormatter();
 		
+		byte[] serializedData = SerializationToolkit.ObjectToByteArray(data); 
+
+		photonView.RPC("UpdateNetworkPlayer", PhotonTargets.Others, serializedData, personalID);
+
 		for(int i = 0; i < beginInterractionTrigger.Length; i++)
 		{
 			if(beginInterractionTrigger[i]) print("begin interraction");
 			beginInterractionTrigger[i] = false;
 			endInterractionTrigger[i] = false;
 		}
-
-		BinaryFormatter formatter = new BinaryFormatter();
-		
-		byte[] serializedData = SerializationToolkit.ObjectToByteArray(data); 
-
-		photonView.RPC("UpdateNetworkPlayer", PhotonTargets.Others, serializedData, personalID);
 	}
 
 	void OnDestroy()
@@ -115,7 +115,7 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 		{
 			if(p.id == id)
 			{
-				p.targetValues = (NetworkPlayerData) SerializationToolkit.ByteArrayToObject(data);
+				p.lastDataPackage = (NetworkPlayerData) SerializationToolkit.ByteArrayToObject(data);
 				return;
 			}
 		}

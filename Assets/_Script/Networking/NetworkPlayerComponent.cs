@@ -6,7 +6,7 @@ using NewtonVR;
 public class NetworkPlayerComponent : MonoBehaviour 
 {
 	public int id;
-	public NetworkPlayerData targetValues;
+	public NetworkPlayerData lastDataPackage;
 
 	GameObject[] _playerParts;
 	NVRVirtualHand[] _hands;
@@ -15,7 +15,7 @@ public class NetworkPlayerComponent : MonoBehaviour
 	{
 		_playerParts = new GameObject[3];
 		_hands = new NVRVirtualHand[2];
-		targetValues = new NetworkPlayerData(new Vector3[]{Vector3.zero,Vector3.zero,Vector3.zero}, 
+		lastDataPackage = new NetworkPlayerData(new Vector3[]{Vector3.zero,Vector3.zero,Vector3.zero}, 
 											new Quaternion[]{Quaternion.identity,Quaternion.identity,Quaternion.identity},
 											new bool[]{false,false},
 											new bool[]{false,false});
@@ -28,8 +28,8 @@ public class NetworkPlayerComponent : MonoBehaviour
 		{
 			if(_playerParts[i] != null)
 			{
-				_playerParts[i].transform.position = Vector3.Lerp(_playerParts[i].transform.position, targetValues.positions[i].Deserialize(), Time.deltaTime * 10);
-				_playerParts[i].transform.rotation = Quaternion.Lerp(_playerParts[i].transform.rotation, targetValues.rotations[i].Deserialize(), Time.deltaTime * 10);
+				_playerParts[i].transform.position = Vector3.Lerp(_playerParts[i].transform.position, lastDataPackage.positions[i].Deserialize(), Time.deltaTime * 10);
+				_playerParts[i].transform.rotation = Quaternion.Lerp(_playerParts[i].transform.rotation, lastDataPackage.rotations[i].Deserialize(), Time.deltaTime * 10);
 			}
 			else
 			{
@@ -39,12 +39,12 @@ public class NetworkPlayerComponent : MonoBehaviour
 
 		for(int i = 0; i < _hands.Length; i++)
 		{
-			if(targetValues.beginInterraction[i])
+			if(lastDataPackage.beginInterraction[i])
 			{
 				print("begin interraction from network player");
 				_hands[i].Hold();
 			} 
-			else if(!targetValues.endInterraction[i])
+			else if(!lastDataPackage.endInterraction[i])
 			{
 				_hands[i].Release();
 			}
