@@ -13,6 +13,7 @@ public class NetworkPlayerComponent : MonoBehaviour
 	void Start()
 	{
 		_playerpart = new GameObject[3];
+		targetValues = new NetworkPlayerData(new Vector3[]{Vector3.zero,Vector3.zero,Vector3.zero}, new Quaternion[]{Quaternion.identity,Quaternion.identity,Quaternion.identity});
 		setPlayerPart();
 	}
 
@@ -50,12 +51,6 @@ public class NetworkPlayerComponent : MonoBehaviour
 				_playerpart[2] = transform.GetChild(i).gameObject;
 				break;
 			}
-
-			// NVRHand hand = transform.GetChild(i).GetComponent<NVRHand>();
-
-			// if(hand == null) _playerpart[0] = transform.GetChild(i).gameObject;
-			// if(hand.IsRight) _playerpart[1] = transform.GetChild(i).gameObject;
-			// else _playerpart[2] = transform.GetChild(i).gameObject;
 		}
 		print("setPlayerPart");
 	}
