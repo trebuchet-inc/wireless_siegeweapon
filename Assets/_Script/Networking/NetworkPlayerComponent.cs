@@ -36,11 +36,26 @@ public class NetworkPlayerComponent : MonoBehaviour
 	{
 		for(int i = 0; i < transform.childCount; i++)
 		{
-			NVRHand hand = transform.GetChild(i).GetComponent<NVRHand>();
+			switch(transform.GetChild(i).name)
+			{
+				case "head" :
+				_playerpart[0] = transform.GetChild(i).gameObject;
+				break;
 
-			if(hand == null) _playerpart[0] = transform.GetChild(i).gameObject;
-			if(hand.IsRight) _playerpart[1] = transform.GetChild(i).gameObject;
-			else _playerpart[2] = transform.GetChild(i).gameObject;
+				case "rightHand" :
+				_playerpart[1] = transform.GetChild(i).gameObject;
+				break;
+
+				case "leftHand" :
+				_playerpart[2] = transform.GetChild(i).gameObject;
+				break;
+			}
+
+			// NVRHand hand = transform.GetChild(i).GetComponent<NVRHand>();
+
+			// if(hand == null) _playerpart[0] = transform.GetChild(i).gameObject;
+			// if(hand.IsRight) _playerpart[1] = transform.GetChild(i).gameObject;
+			// else _playerpart[2] = transform.GetChild(i).gameObject;
 		}
 		print("setPlayerPart");
 	}
