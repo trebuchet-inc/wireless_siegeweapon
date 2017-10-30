@@ -389,7 +389,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   PhysicalController: {fileID: 0}
   Hand: 0
-  radius: 0.5
+  radius: 0.1
 --- !u!114 &114386405849299032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -434,7 +434,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   PhysicalController: {fileID: 0}
   Hand: 1
-  radius: 0.5
+  radius: 0.1
 --- !u!114 &114653851793202388
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  targetValues:
+  lastDataPackage:
     positions: []
     rotations: []
     beginInterraction: 
