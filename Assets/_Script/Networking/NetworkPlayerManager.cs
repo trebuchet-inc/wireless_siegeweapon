@@ -45,12 +45,7 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 	{
 		get
 		{
-			bool[] buffer = _beginInterractionTrigger;
-			for(int i = 0; i < _beginInterractionTrigger.Length; i++)
-			{
-				_beginInterractionTrigger[i] = false;
-			}
-			return buffer;
+			return _beginInterractionTrigger;
 		}
 		set
 		{
@@ -62,16 +57,11 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 	{
 		get
 		{
-			bool[] buffer = _beginInterractionTrigger;
-			for(int i = 0; i < _beginInterractionTrigger.Length; i++)
-			{
-				_beginInterractionTrigger[i] = false;
-			}
-			return buffer;
+			return _endInterractionTrigger;
 		}
 		set
 		{
-			_beginInterractionTrigger = value;
+			_endInterractionTrigger = value;
 		}
 	}
 
@@ -98,6 +88,12 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 			new Quaternion[]{NVRPlayer.Instance.Head.transform.rotation, NVRPlayer.Instance.LeftHand.transform.rotation, NVRPlayer.Instance.RightHand.transform.rotation},
 			beginInterractionTrigger,
 			endInterractionTrigger);
+		
+		for(int i = 0; i < beginInterractionTrigger.Length; i++)
+		{
+			beginInterractionTrigger[i] = false;
+			endInterractionTrigger[i] = false;
+		}
 
 		BinaryFormatter formatter = new BinaryFormatter();
 		
