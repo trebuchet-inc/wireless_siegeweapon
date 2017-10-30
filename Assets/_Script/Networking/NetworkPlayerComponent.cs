@@ -74,12 +74,12 @@ public class NetworkPlayerComponent : MonoBehaviour
 
 				case "rightHand" :
 				_playerParts[1] = transform.GetChild(i).gameObject;
-				_hands[0] = _playerParts[1].GetComponent<NVRVirtualHand>();
+				_hands[1] = _playerParts[1].GetComponent<NVRVirtualHand>();
 				break;
 
 				case "leftHand" :
 				_playerParts[2] = transform.GetChild(i).gameObject;
-				_hands[1] = _playerParts[2].GetComponent<NVRVirtualHand>();
+				_hands[0] = _playerParts[2].GetComponent<NVRVirtualHand>();
 				break;
 			}
 		}
