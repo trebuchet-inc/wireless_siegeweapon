@@ -607,7 +607,7 @@ namespace NewtonVR
 
         protected bool PickupClosest()
         {
-            print(transform.parent.name + " PickupClosest");
+            print(transform.parent.name + " PickupClosest : Hovering objects - " + CurrentlyHoveringOver.Count);
             NVRInteractable closest = null;
             float closestDistance = float.MaxValue;
 
