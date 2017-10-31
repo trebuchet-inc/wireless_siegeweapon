@@ -266,7 +266,7 @@ namespace NewtonVR
                 OnBeginInteraction.Invoke();
             }
 
-            if(GetComponent<NVRVirtualHand>() == null)NetworkObjectManager.Instance.SendBeginInterraction(this, hand);
+            if(hand.GetComponent<NVRVirtualHand>() == null)NetworkObjectManager.Instance.SendBeginInterraction(this, hand);
         }
 
         public override void EndInteraction(NVRHand hand)
@@ -309,7 +309,7 @@ namespace NewtonVR
                 }
             }
 
-            if(GetComponent<NVRVirtualHand>() == null)NetworkObjectManager.Instance.SendEndInterraction(this);
+            if(hand.GetComponent<NVRVirtualHand>() == null)NetworkObjectManager.Instance.SendEndInterraction(this);
         }
 
         public override void HoveringUpdate(NVRHand hand, float forTime)
