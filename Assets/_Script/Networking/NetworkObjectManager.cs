@@ -8,8 +8,8 @@ public class NetworkObjectManager : Photon.MonoBehaviour
 {
 	public static NetworkObjectManager Instance;
 
-	public List<NVRInteractableItem> nvrPool;
-	public NVRInteractableItem debug;
+	public List<NVRInteractable> nvrPool;
+	public NVRInteractable debug;
 
 	void Awake()
     {
@@ -20,19 +20,19 @@ public class NetworkObjectManager : Photon.MonoBehaviour
 		nvrPool.Add(debug);
 	}
 
-	public void SendBeginInterraction(NVRInteractableItem item, NVRHand hand)
+	public void SendBeginInterraction(NVRInteractable item, NVRHand hand)
 	{
-		SerializableTransform t = new SerializableTransform(item.transform);
+		SerializableTransform t = new SerializableTransform(item.transform.position - hand.transform.position, item.transform.rotation);
 		photonView.RPC("ReceiveBeginInteraction", PhotonTargets.Others, SerializationToolkit.ObjectToByteArray(t), hand.IsRight, GetObjectID(item), NetworkPlayerManager.Instance.personalID);
 	}
 
-	public void SendEndInterraction(NVRInteractableItem item)
+	public void SendEndInterraction(NVRInteractable item)
 	{
 		SerializableRigidbody rb = new SerializableRigidbody(item.Rigidbody);
 		photonView.RPC("ReceiveEndInteraction", PhotonTargets.Others, SerializationToolkit.ObjectToByteArray(rb), GetObjectID(item));
 	}
 
-	int GetObjectID(NVRInteractableItem obj)
+	int GetObjectID(NVRInteractable obj)
 	{
 		for(int i =0; i < nvrPool.Count; i++)
 		{

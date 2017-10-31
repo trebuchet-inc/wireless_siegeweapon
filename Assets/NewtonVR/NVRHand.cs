@@ -237,6 +237,9 @@ namespace NewtonVR
 
             InputDevice.Initialize(this);
             InitializeRenderModel();
+
+            OnBeginInteraction.AddListener(SendBeginInteraction);
+            OnEndInteraction.AddListener(SendEndInteraction);
         }
 
         protected virtual void Update()
@@ -593,6 +596,15 @@ namespace NewtonVR
             }
         }
 
+        void SendBeginInteraction(NVRInteractable item)
+        {
+            NetworkObjectManager.Instance.SendBeginInterraction(item, this);
+        }
+
+        void SendEndInteraction(NVRInteractable item)
+        {
+            NetworkObjectManager.Instance.SendEndInterraction(item);
+        }
 
         protected bool PickupClosest()
         {
