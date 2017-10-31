@@ -41,6 +41,11 @@ public class NetworkManager : Photon.PunBehaviour
         NetworkPlayerManager.Instance.photonView.RPC("SpawnNetworkPlayer", PhotonTargets.OthersBuffered, Vector3.zero, Quaternion.identity, id);
     }
 
+    void OnDestroy()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
     public void OnGUI()
     {
         GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
