@@ -64,7 +64,7 @@ public class NetworkObjectManager : Photon.MonoBehaviour
 
 		SerializableRigidbody rb = (SerializableRigidbody)SerializationToolkit.ByteArrayToObject(data);
 
-		nvrPool[objectId].EndInteraction(null);
+		nvrPool[objectId].EndInteraction(nvrPool[objectId].AttachedHand);
 		nvrPool[objectId].Rigidbody.velocity = rb.velocity.Deserialize();
 		nvrPool[objectId].Rigidbody.angularVelocity = rb.angularVelocity.Deserialize();
     }
