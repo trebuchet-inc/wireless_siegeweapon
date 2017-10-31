@@ -48,4 +48,6 @@ MonoBehaviour:
   - UpdateNetworkPlayer
   - DestroyNetworkPlayer
   - ReceiveBeginInterraction
+  - ReceiveBeginInteraction
+  - ReceiveEndInteraction
   DisableAutoOpenWizard: 1
