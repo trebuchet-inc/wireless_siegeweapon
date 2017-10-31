@@ -71,11 +71,6 @@ public class NetworkPlayerManager : Photon.MonoBehaviour
 		return null;
 	}
 
-	void OnDestroy()
-	{
-		photonView.RPC("DestroyNetworkPlayer", PhotonTargets.Others, personalID);
-	}
-
 	[PunRPC]
     void UpdateNetworkPlayer(byte[] data, int id)
     {

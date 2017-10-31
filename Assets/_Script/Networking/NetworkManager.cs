@@ -40,10 +40,11 @@ public class NetworkManager : Photon.PunBehaviour
         NetworkPlayerManager.Instance.personalID = id;
         NetworkPlayerManager.Instance.photonView.RPC("SpawnNetworkPlayer", PhotonTargets.OthersBuffered, Vector3.zero, Quaternion.identity, id);
     }
-
-    void OnDestroy()
+    
+    public override void OnLeftRoom()
     {
-        PhotonNetwork.LeaveRoom();
+        NetworkPlayerManager.Instance.photonView.RPC("DestroyNetworkPlayer", PhotonTargets.Others, NetworkPlayerManager.Instance.personalID);
+        print("DestroyNetworkPlayer");
     }
 
     public void OnGUI()

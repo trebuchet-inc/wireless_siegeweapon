@@ -9,16 +9,11 @@ public class NetworkObjectManager : Photon.MonoBehaviour
 	public static NetworkObjectManager Instance;
 
 	public List<NVRInteractable> nvrPool;
-	public NVRInteractable debug;
 
 	void Awake()
     {
         Instance = this;
     }	
-	
-	void Start () {
-		nvrPool.Add(debug);
-	}
 
 	public void SendBeginInterraction(NVRInteractable item, NVRHand hand)
 	{

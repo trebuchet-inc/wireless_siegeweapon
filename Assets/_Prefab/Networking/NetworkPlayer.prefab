@@ -447,8 +447,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  lastDataPackage:
-    positions: []
-    rotations: []
-    beginInterraction: 
-    endInterraction: 
+  playerParts: []
