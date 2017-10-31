@@ -47,4 +47,5 @@ MonoBehaviour:
   - SpawnNetworkPlayer
   - UpdateNetworkPlayer
   - DestroyNetworkPlayer
+  - ReceiveBeginInterraction
   DisableAutoOpenWizard: 1

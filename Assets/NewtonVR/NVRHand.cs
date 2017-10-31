@@ -237,9 +237,6 @@ namespace NewtonVR
 
             InputDevice.Initialize(this);
             InitializeRenderModel();
-
-            OnBeginInteraction.AddListener(SendBegininteraction);
-            OnEndInteraction.AddListener(SendEndInteraction);
         }
 
         protected virtual void Update()
@@ -570,14 +567,6 @@ namespace NewtonVR
             }
         }
 
-        public void SendBegininteraction(NVRInteractable interactable)
-        {
-            if(IsRight) NetworkPlayerManager.Instance.beginInterractionTrigger[0] = true;
-            else NetworkPlayerManager.Instance.beginInterractionTrigger[1] = true;
-
-            NetworkPlayerManager.Instance.objectName = interactable.transform.name;
-        }
-
         public virtual void EndInteraction(NVRInteractable item)
         {
             if (item != null && CurrentlyHoveringOver.ContainsKey(item) == true)
@@ -604,15 +593,9 @@ namespace NewtonVR
             }
         }
 
-        public void SendEndInteraction(NVRInteractable interactable)
-        {
-            if(IsRight) NetworkPlayerManager.Instance.endInterractionTrigger[0] = true;
-            else NetworkPlayerManager.Instance.endInterractionTrigger[1] = true;
-        }
 
         protected bool PickupClosest()
         {
-            print(transform.parent.name + " PickupClosest : Hovering objects - " + CurrentlyHoveringOver.Count);
             NVRInteractable closest = null;
             float closestDistance = float.MaxValue;
 

@@ -197,7 +197,7 @@ MonoBehaviour:
   SteamVREnabled: 1
   OculusSDKEnabled: 1
   InteractionStyle: 0
-  PhysicalHands: 1
+  PhysicalHands: 0
   MakeControllerInvisibleOnInteraction: 0
   AutomaticallySetControllerTransparency: 0
   VibrateOnHover: 1

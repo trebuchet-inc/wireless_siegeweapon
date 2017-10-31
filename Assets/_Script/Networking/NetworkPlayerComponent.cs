@@ -6,16 +6,17 @@ using NewtonVR;
 public class NetworkPlayerComponent : MonoBehaviour 
 {
 	public int id;
-	public List<NetworkPlayerData> dataBuffer;
 
-	GameObject[] _playerParts;
+	[HideInInspector] public GameObject[] playerParts;
+	List<NetworkPlayerData> _dataBuffer;
+	NetworkPlayerData _lastData;
 	NVRVirtualHand[] _hands;
 
 	void Start()
 	{
-		_playerParts = new GameObject[3];
+		playerParts = new GameObject[3];
 		_hands = new NVRVirtualHand[2];
-		dataBuffer = new List<NetworkPlayerData>();
+		_dataBuffer = new List<NetworkPlayerData>();
 		setPlayerPart();
 	}
 
@@ -26,15 +27,14 @@ public class NetworkPlayerComponent : MonoBehaviour
 
 	void readData()
 	{
-		if(dataBuffer.Count <= 0) return;
+		if(_lastData == null) return;
 
-		for(int i = 0; i < _playerParts.Length; i++)
+		for(int i = 0; i < playerParts.Length; i++)
 		{
-			if(_playerParts[i] != null)
+			if(playerParts[i] != null)
 			{
-				NetworkPlayerData lastDataPackage = dataBuffer[dataBuffer.Count - 1];
-				_playerParts[i].transform.position = Vector3.Lerp(_playerParts[i].transform.position, lastDataPackage.positions[i].Deserialize(), Time.deltaTime * 10);
-				_playerParts[i].transform.rotation = Quaternion.Lerp(_playerParts[i].transform.rotation, lastDataPackage.rotations[i].Deserialize(), Time.deltaTime * 10);
+				playerParts[i].transform.position = Vector3.Lerp(playerParts[i].transform.position, _lastData.positions[i].Deserialize(), Time.deltaTime * 10);
+				playerParts[i].transform.rotation = Quaternion.Lerp(playerParts[i].transform.rotation, _lastData.rotations[i].Deserialize(), Time.deltaTime * 10);
 			}
 			else
 			{
@@ -42,24 +42,15 @@ public class NetworkPlayerComponent : MonoBehaviour
 			} 
 		}
 
-		foreach(NetworkPlayerData data in dataBuffer)
-		{
-			for(int i = 0; i < _hands.Length; i++)
-			{
-				if(data.beginInterraction[i])
-				{
-					print("begin interraction from network player");
-					_hands[i].ForceInteraction(data.objectName);
-				} 
-				else if(data.endInterraction[i])
-				{
-					print("end interraction from network player");
-					_hands[i].Release();
-				}
-			}
-		}
+		if(_dataBuffer.Count <= 0) return;
 
-		dataBuffer.Clear();
+		_dataBuffer.Clear();
+	}
+
+	public void ReceiveData(NetworkPlayerData data)
+	{
+		_lastData = data;
+		_dataBuffer.Add(data);
 	}
 
 	void setPlayerPart()
@@ -69,17 +60,17 @@ public class NetworkPlayerComponent : MonoBehaviour
 			switch(transform.GetChild(i).name)
 			{
 				case "head" :
-				_playerParts[0] = transform.GetChild(i).gameObject;
+				playerParts[0] = transform.GetChild(i).gameObject;
 				break;
 
 				case "rightHand" :
-				_playerParts[1] = transform.GetChild(i).gameObject;
-				_hands[1] = _playerParts[1].GetComponent<NVRVirtualHand>();
+				playerParts[1] = transform.GetChild(i).gameObject;
+				_hands[1] = playerParts[1].GetComponent<NVRVirtualHand>();
 				break;
 
 				case "leftHand" :
-				_playerParts[2] = transform.GetChild(i).gameObject;
-				_hands[0] = _playerParts[2].GetComponent<NVRVirtualHand>();
+				playerParts[2] = transform.GetChild(i).gameObject;
+				_hands[0] = playerParts[2].GetComponent<NVRVirtualHand>();
 				break;
 			}
 		}

@@ -45,6 +45,47 @@ public class SerializableQuaternion
 	}
 }
 
+[Serializable]
+public class SerializableTransform
+{
+	public SerializableVector3 position;
+	public SerializableQuaternion rotation;
+	public SerializableVector3 scale;
+
+	public SerializableTransform (Transform t) 
+	{
+		position = new SerializableVector3(t.position);
+		rotation = new SerializableQuaternion(t.rotation);
+		scale = new SerializableVector3(t.localScale);
+	}
+
+	public SerializableTransform (Vector3 pos, Quaternion rot) 
+	{
+		position = new SerializableVector3(pos);
+		rotation = new SerializableQuaternion(rot);
+		scale = new SerializableVector3(Vector3.one);
+	}
+
+	public SerializableTransform (Vector3 pos, Quaternion rot, Vector3 sca) 
+	{
+		position = new SerializableVector3(pos);
+		rotation = new SerializableQuaternion(rot);
+		scale = new SerializableVector3(sca);
+	}
+}
+
+public class SerializableRigidbody
+{
+	public SerializableVector3 velocity;
+	public SerializableVector3 angularVelocity;
+
+	public SerializableRigidbody (Rigidbody rb)
+	{
+		velocity = new SerializableVector3(rb.velocity);
+		angularVelocity = new SerializableVector3(rb.angularVelocity);
+	} 
+}
+
 public class SerializationToolkit 
 {
 	public static byte[] ObjectToByteArray(object obj)

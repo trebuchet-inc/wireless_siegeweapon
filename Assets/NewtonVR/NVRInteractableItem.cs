@@ -265,6 +265,8 @@ namespace NewtonVR
             {
                 OnBeginInteraction.Invoke();
             }
+
+            NetworkObjectManager.Instance.SendBeginInterraction(this, hand);
         }
 
         public override void EndInteraction(NVRHand hand)
@@ -306,6 +308,8 @@ namespace NewtonVR
                     OnEndInteraction.Invoke();
                 }
             }
+
+            NetworkObjectManager.Instance.SendEndInterraction(this);
         }
 
         public override void HoveringUpdate(NVRHand hand, float forTime)

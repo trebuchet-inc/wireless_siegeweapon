@@ -5,6 +5,8 @@ public class NetworkManager : Photon.PunBehaviour
 {
     public static NetworkManager Instance;
 
+    bool _roomCreator = false;
+
     void Awake()
     {
         Instance = this;
@@ -29,6 +31,7 @@ public class NetworkManager : Photon.PunBehaviour
     public void OnPhotonRandomJoinFailed()
     {
         PhotonNetwork.CreateRoom(null);
+        _roomCreator = true;
     }
 
     public override void OnJoinedRoom()
