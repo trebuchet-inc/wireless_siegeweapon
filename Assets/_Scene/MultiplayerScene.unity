@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nvrPool: []
-  debug: {fileID: 0}
+  debug: {fileID: 2009656254}
 --- !u!114 &1171569444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,3 +581,9 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7cbf2fb37c9d2f947a1b3102ff873f8b, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &2009656254 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114095852779367482, guid: 0d25466df49c5eb4bae86be8c40f75f7,
+    type: 2}
+  m_PrefabInternal: {fileID: 669233899}
+  m_Script: {fileID: 11500000, guid: fa4a39dec1a23a043a14d554ccce8fe0, type: 3}

@@ -74,6 +74,7 @@ public class SerializableTransform
 	}
 }
 
+[Serializable]
 public class SerializableRigidbody
 {
 	public SerializableVector3 velocity;
