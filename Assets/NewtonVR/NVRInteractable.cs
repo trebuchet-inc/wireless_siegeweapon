@@ -117,8 +117,7 @@ namespace NewtonVR
         public virtual void BeginInteraction(NVRHand hand)
         {
             AttachedHands.Add(hand);
-            print(transform.name + " Begin interaction with " + hand.transform.parent.name);
-
+            
             if (DisableKinematicOnAttach == true)
             {
                 Rigidbody.isKinematic = false;

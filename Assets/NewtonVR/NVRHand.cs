@@ -549,7 +549,6 @@ namespace NewtonVR
 
         public virtual void BeginInteraction(NVRInteractable interactable)
         {
-            print(transform.parent.name + " BeginInteraction");
             if (interactable.CanAttach == true)
             {
                 if (interactable.AttachedHand != null)
